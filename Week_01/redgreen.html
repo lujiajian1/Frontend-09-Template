@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>redgreen</title>
+</head>
+<style>
+    div {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        background-color: #ccc;
+        margin-right: 50px;
+    }
+
+    .red.light {
+        background-color: red;
+    }
+
+    .green.light {
+        background-color: green;
+    }
+
+    .yellow.light {
+        background-color: yellow;
+    }
+</style>
+
+<body>
+    <div class="green"></div>
+    <div class="yellow"></div>
+    <div class="red"></div>
+    <script>
+        function clearAllLight() {
+            var lights = document.getElementsByTagName('div');
+            for (let i = 0; i < 3; i++) {
+                lights[i].classList.remove('light');
+            }
+        }
+        function green() {
+            clearAllLight();
+            document.getElementsByClassName('green')[0].classList.add('light');
+        }
+        function yellow() {
+            clearAllLight();
+            document.getElementsByClassName('yellow')[0].classList.add('light');
+        }
+        function red() {
+            clearAllLight();
+            document.getElementsByClassName('red')[0].classList.add('light');
+        }
+        function go() {
+            let time = 0;
+            green();
+            setInterval(() => {
+                time++
+                if (time === 10) {
+                    yellow();
+                } else if (time === 12) {
+                    red();
+                } else if (time === 17) {
+                    time = 0;
+                    green();
+                }
+            }, 1000)
+        }
+    </script>
+</body>
+
+</html>
