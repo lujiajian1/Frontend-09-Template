@@ -64,9 +64,11 @@
             var queue = [start];
             function insert(x, y) {
                 if (x < 0 || x >= 100 || y < 0 || y >= 100) {
+                    //超出边界
                     return;
                 }
                 if (map[y * 100 + x]) {
+                    //map[y * 100 + x]非0，1:有墙，2:已搜索
                     return;
                 }
                 map[y * 100 + x] = 2;
