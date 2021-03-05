@@ -109,7 +109,7 @@
                     //判断table[y * 100 + x]非0，1:有墙, [x,y]: 寻路点
                     return;
                 }
-                //await sleep(1);
+                await sleep(30);
                 container.children[y * 100 + x].style.backgroundColor = "lightgreen";
                 table[y * 100 + x] = pre;
                 queue.give([x, y]);
@@ -119,7 +119,7 @@
                 return (point[0] - end[0]) ** 2 + (point[1] - end[1]) ** 2;
             }
 
-            while (queue.length) {
+            while (queue.data.length) {
                 let [x, y] = queue.take();
                 //console.log([x, y]);
                 if (x === end[0] && y === end[1]) {
