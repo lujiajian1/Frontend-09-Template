@@ -3,6 +3,9 @@
 ![字典树示例图片](https://s3plus.meituan.net/v1/mss_c9d411db85ec4b59aaebc4dfca416c55/image-hosting/markdown/m-form-6.png)
 
 ### KMP：在长字符串里找模式
+
+[从头到尾彻底理解KMP](https://blog.csdn.net/v_july_v/article/details/7041827#t10)
+
 ### Wildcard：带通配符的字符串模式
 ### 正则：字符串通用模式匹配
 ### 状态机：通用字符串分析
