@@ -1,6 +1,6 @@
 ### 字典树：大量高重复字符串的存储与分析
 
-![字典树示例图片](https://s3plus.meituan.net/v1/mss_c9d411db85ec4b59aaebc4dfca416c55/image-hosting/markdown/m-form-6.png)
+![字典树示例图片](https://github.com/lujiajian1/Frontend-09-Template/blob/main/Week_04/img/1.jpg)
 
 ### KMP：在长字符串里找模式
 
