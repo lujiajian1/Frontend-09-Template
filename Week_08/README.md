@@ -2,7 +2,7 @@
 
 我们看到的页面都是一个图片形式，专业点的说法叫做位图（Bitmap），然后经过显卡转换为我们可以识别的光信号。整个的过程就是从 URL 转换为 Bitmap 的过程，先发送请求到服务器，然后服务器返回 HTML，浏览器解析 HTML，然后构建 DOM 树，计算 CSS 属性，然后进行排版，最后渲染成位图，然后经过操作系统或硬件的 API 完成视图的显示。
 
-![浏览器基础渲染流程示例图片](https://github.com/lujiajian1/Frontend-09-Template/blob/main/Week_08/img/浏览器基础渲染流程.jpg)
+![浏览器基础渲染流程示例图片](https://github.com/lujiajian1/Frontend-09-Template/blob/main/Week_08/img/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E7%A1%80%E6%B8%B2%E6%9F%93%E6%B5%81%E7%A8%8B.png)
 
 ## 有限状态机处理字符串
 
