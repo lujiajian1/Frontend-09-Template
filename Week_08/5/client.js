@@ -82,15 +82,13 @@ class ResponseParser {
     this.current = this.WAITING_STATUS_LINE;
     this.statusLine = "";
     this.headers = {};
-    this.headerName = "";
-    this.headerValue = "";
+    this.headersName = "";
+    this.headersValue = "";
     this.bodyParser = null;
   }
-
   get isFinished() {
     return this.bodyParser && this.bodyParser.isFinished;
   }
-
   get response() {
     this.statusLine.match(/HTTP\/1.1 ([0-9]+) ([\s\S]+)/);
     return {
@@ -100,13 +98,11 @@ class ResponseParser {
       body: this.bodyParser.content.join(""),
     };
   }
-
   receive(string) {
     for (let i = 0; i < string.length; i++) {
       this.receiveChar(string.charAt(i));
     }
   }
-
   receiveChar(char) {
     if (this.current === this.WAITING_STATUS_LINE) {
       if (char === "\r") {
@@ -123,8 +119,10 @@ class ResponseParser {
         this.current = this.WAITING_HEADER_SPACE;
       } else if (char === "\r") {
         this.current = this.WAITING_HEADER_BLOCK_END;
+        if (this.headers["Transfer-Encoding"] === "chunked")
+          this.bodyParser = new TrunkedBodyParser();
       } else {
-        this.headerName += char;
+        this.headersName += char;
       }
     } else if (this.current === this.WAITING_HEADER_SPACE) {
       if (char === " ") {
@@ -133,11 +131,11 @@ class ResponseParser {
     } else if (this.current === this.WAITING_HEADER_VALUE) {
       if (char === "\r") {
         this.current = this.WAITING_HEADER_LINE_END;
-        this.headers[this.headerName] = this.headerValue;
-        this.headerName = "";
-        this.headerValue = "";
+        this.headers[this.headersName] = this.headersValue;
+        this.headersName = "";
+        this.headersValue = "";
       } else {
-        this.headerValue += char;
+        this.headersValue += char;
       }
     } else if (this.current === this.WAITING_HEADER_LINE_END) {
       if (char === "\n") {
@@ -146,10 +144,9 @@ class ResponseParser {
     } else if (this.current === this.WAITING_HEADER_BLOCK_END) {
       if (char === "\n") {
         this.current = this.WAITING_BODY;
-        if (this.headers["Transfer-Encoding"] === "chunked")
-          this.bodyParser = new TrunkedBodyParser();
       }
     } else if (this.current === this.WAITING_BODY) {
+      // console.log(char);
       this.bodyParser.receiveChar(char);
     }
   }
@@ -167,13 +164,11 @@ class TrunkedBodyParser {
     this.isFinished = false;
     this.current = this.WAITING_LENGTH;
   }
-
   receiveChar(char) {
     if (this.current === this.WAITING_LENGTH) {
       if (char === "\r") {
         if (this.length === 0) {
           this.isFinished = true;
-          return;
         }
         this.current = this.WAITING_LENGTH_LINE_END;
       } else {
@@ -191,9 +186,13 @@ class TrunkedBodyParser {
         this.current = this.WAITING_NEW_LINE;
       }
     } else if (this.current === this.WAITING_NEW_LINE) {
-      if (char === "\r") this.current = this.WAITING_NEW_LINE_END;
+      if (char === "\r") {
+        this.current = this.WAITING_NEW_LINE_END;
+      }
     } else if (this.current === this.WAITING_NEW_LINE_END) {
-      if (char === "\n") this.current = this.WAITING_LENGTH;
+      if (char === "\n") {
+        this.current = this.WAITING_LENGTH;
+      }
     }
   }
 }
