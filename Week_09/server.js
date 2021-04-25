@@ -26,7 +26,7 @@ http
                 width: 30px;
                 background-color: #ff1111;
             }
-         </style>
+        </style>
     </head>
     <body>
         <div>
