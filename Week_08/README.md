@@ -45,7 +45,7 @@ while (input) {
 * 设计一个send函数，把请求真实发送到服务器
 * send函数应该是异步的，所以返回Promise
 
-## 第三步发送请求
+## 第三步：发送请求
 
 * 设计支持已有的connection或者自己新建connection
 * 收到数据传给parser
