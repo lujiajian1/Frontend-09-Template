@@ -17,25 +17,56 @@ class Carousel extends Component {
       this.root.appendChild(child);
     }
 
-    let currentIndex = 0;
-    setInterval(() => {
+    let position = 0;
+
+    this.root.addEventListener("mousedown", (event) => {
       let children = this.root.children;
-      let nextIndex = (currentIndex + 1) % children.length;
+      let startX = event.clientX;
 
-      let current = children[currentIndex];
-      let next = children[nextIndex];
+      let move = (event) => {
+        let x = event.clientX - startX;
+        for (let child of children) {
+          child.style.transition = "none";
+          child.style.transform = `translateX(${-position * 500 + x}px)`;
+        }
+      };
 
-      next.style.transition = "none";
-      next.style.transform = `translateX(${100 - nextIndex * 100}%)`;
+      let up = (event) => {
+        let x = event.clientX - startX;
+        position = position - Math.round(x / 500);
+        for (let child of children) {
+          child.style.transition = "";
+          child.style.transform = `translateX(${-position * 500}px)`;
+        }
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+      };
 
-      setTimeout(() => {
-        next.style.transition = "";
-        current.style.transform = `translateX(${-100 - currentIndex * 100}%)`;
-        next.style.transform = `translateX(${- nextIndex * 100}%)`;
+      document.addEventListener("mousemove", move);
 
-        currentIndex = nextIndex;
-      }, 16);
-    }, 3000);
+      document.addEventListener("mouseup", up);
+    });
+
+    // 自动播放
+    // let currentIndex = 0;
+    // setInterval(() => {
+    //   let children = this.root.children;
+    //   let nextIndex = (currentIndex + 1) % children.length;
+
+    //   let current = children[currentIndex];
+    //   let next = children[nextIndex];
+
+    //   next.style.transition = "none";
+    //   next.style.transform = `translateX(${100 - nextIndex * 100}%)`;
+
+    //   setTimeout(() => {
+    //     next.style.transition = "";
+    //     current.style.transform = `translateX(${-100 - currentIndex * 100}%)`;
+    //     next.style.transform = `translateX(${- nextIndex * 100}%)`;
+
+    //     currentIndex = nextIndex;
+    //   }, 16);
+    // }, 3000);
 
     return this.root;
   }
