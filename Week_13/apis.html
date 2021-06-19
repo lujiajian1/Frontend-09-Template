@@ -1,0 +1,13 @@
+<script>
+    let names = Object.getOwnPropertyNames(window);
+
+    function filterOut(names, props) {
+        let set = new Set();
+        props.forEach(o => {
+            set.add(o);
+        });
+        return names.filter(e => !set.has(e))
+    }
+
+    console.log(names);
+</script>
