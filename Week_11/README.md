@@ -1,1 +1,39 @@
-学习笔记
+### CSS
+
+* at-rules
+    * @charset
+    * @import
+    * @media(重要)
+    * @page
+    * @counter-style
+    * @keyframes(重要)
+    * @fontface(重要)
+    * @supports(不推荐)
+    * @namespace
+* rule（CSS规则）
+    * 选择器（Selector）
+        * selector_group
+        * selector
+            * \>
+            * \<sp\>
+            * \+
+            * \~
+        * simple_selector
+            * type
+            * \*
+            * \.
+            * \#
+            * \[\]
+            * :
+            * ::
+            * :not()
+
+    * 声明（Declaration）
+        * Key
+            * Properties
+            * Variables
+        * Value
+            * calc
+            * number
+            * length
+            * ......
