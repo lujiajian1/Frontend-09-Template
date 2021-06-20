@@ -14,20 +14,35 @@
     * 选择器（Selector）
         * selector_group
         * selector
-            * \>
-            * \<sp\>
+            * \> (子元素)
+            * \<sp\> (空格)
             * \+
             * \~
+            * ||
         * simple_selector
-            * type
-            * \*
-            * \.
-            * \#
-            * \[\]
-            * :
-            * ::
-            * :not()
-
+            * type (div|a)
+            * \* (全部)
+            * \. (clas)
+            * \# (id)
+            * \[\] (属性选择器)
+            * : (伪类)
+                * :any-link
+                * :link:visited
+                * :hover
+                * :active
+                * :focus
+                * :target
+                * :empty
+                * :nth-child()
+                * :nth-last-child()
+                * :first-child:last-child:only-child
+                * :not()
+                * :where:has
+            * :: (伪元素选择器)
+                * ::before
+                * ::after
+                * ::first-line
+                * ::first-letter
     * 声明（Declaration）
         * Key
             * Properties
